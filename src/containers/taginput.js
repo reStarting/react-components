@@ -8,7 +8,7 @@ export default class App extends React.Component {
   render() {
     return (
       <div>
-        <TagInput autofocus={true} style={{width: 500}} value={['react', 'redux']} />
+        <TagInput autofocus={true} width={500} value={['react', 'redux']} />
       </div>
     );
   }

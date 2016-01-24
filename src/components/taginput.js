@@ -105,8 +105,10 @@ export default class TagInput extends React.Component {
   }
 
   render() {
+    const {style, width, ...other} = this.props;
+    const ws = Object.assign({}, wrapStyle, style, {width});
     return (
-      <span {...this.props} style={wrapStyle} onMouseDown={::this.onMouseDown}>
+      <span {...other} style={ws} onMouseDown={::this.onMouseDown}>
         {
           this.renderTags()
         }
