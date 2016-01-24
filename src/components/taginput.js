@@ -1,11 +1,32 @@
 import React, {PropTypes} from 'react';
 import AutoSizeInput from './autosizeinput';
-import '../styles/taginput.less'
 
 let index = 0;
 
 function uid() {
   return 'tag' + (++index);
+}
+
+const wrapStyle = {
+  display: 'inline-block',
+  verticalAlign: 'middle',
+  border: '2px solid gray',
+  padding: 4
+}
+const tagStyle = {
+  float: 'left',
+  cursor: 'pointer',
+  background: 'gray',
+  color: 'white',
+  margin: 2,
+  padding: '2px 6px',
+  borderRadius: 2
+}
+
+const inputStyle = {
+  float: 'left',
+  padding: 3,
+  fontSize:16
 }
 
 export default class TagInput extends React.Component {
@@ -69,18 +90,18 @@ export default class TagInput extends React.Component {
 
   render() {
     return (
-      <span {...this.props} className="taginput" onMouseDown={::this.onMouseDown}>
+      <span {...this.props} style={wrapStyle} onMouseDown={::this.onMouseDown}>
         {
           this.renderTags()
         }
-      	<AutoSizeInput onKeyDown={::this.onKeyDown} ref="input" value="taginput" />
+      	<AutoSizeInput style={inputStyle} onKeyDown={::this.onKeyDown} ref="input" value="taginput" />
       </span>
     );
   }
   renderTags() {
     return this.state.tags.map(tag => {
       return (
-        <span className="taginput-tag" key={uid()}>{tag}</span>
+        <span style={tagStyle} key={uid()}>{tag}</span>
       )
     })
   }

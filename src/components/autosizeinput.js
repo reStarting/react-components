@@ -1,5 +1,12 @@
 import React, {PropTypes} from 'react';
-import '../styles/autosizeinput.less'
+
+const iptstyle = {
+  verticalAlign: 'text-top',
+  margin:0,
+  padding:0,
+  border: 0,
+  outline: 0
+}
 
 const sizerStyle = { position: 'absolute', visibility: 'hidden', height: 0, width: 0, overflow: 'scroll', whiteSpace: 'nowrap' };
 const nextFrame = typeof window !== 'undefined' ? (function(){
@@ -77,9 +84,9 @@ export default class AutoSizeInput extends React.Component {
   }
   render() {
     const {style, ...other} = this.props;
-    const inputStyle = Object.assign({width: this.state.width}, style);
+    const inputStyle = Object.assign({width: this.props.width || this.state.width}, iptstyle, style);
     return (
-      <span className="autosizeinput" ref="wrap">
+      <span style={{verticalAlign: 'middle'}} ref="wrap">
       	<input {...other} ref="input" 
       		value={this.state.value}
       		onChange={this.onValueChange.bind(this)} 

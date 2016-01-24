@@ -10,7 +10,8 @@ files.map(file => {
   var entry = path.basename(file, '.js');
   if(entry != '.DS_Store')
   {
-    var entryFile = ['webpack-dev-server/client?http://localhost:3000', 'webpack/hot/dev-server', './src/entries/'+ file, 'babel-polyfill'];
+    // , 'babel-polyfill'
+    var entryFile = ['webpack-dev-server/client?http://localhost:3000', 'webpack/hot/dev-server', './src/entries/'+ file];
     webpackConfig.entry[entry] = entryFile
   }
 })
