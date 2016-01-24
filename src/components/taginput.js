@@ -51,15 +51,19 @@ export default class TagInput extends React.Component {
   }
 
   onKeyDown(e) {
+    const value = e.target.value
     if( e.keyCode == 13 ) //enter
     {
-      const value = e.target.value
       if(value.trim() == '') return;
-      const tags = this.state.tags;
       this.clear();
-      this.setState({
-        tags: [...tags, value]
-      })
+      this.pushValue(value)
+    }
+    else if( e.keyCode == 8 ) //delete
+    {
+      if(value == '')
+      {
+        this.popValue();
+      }
     }
   }
   onMouseDown(e) {
@@ -86,6 +90,18 @@ export default class TagInput extends React.Component {
   }
   clear() {
     this.getInput().clear();
+  }
+  pushValue(value) {
+    const tags = this.state.tags;
+    this.setState({
+      tags: [...tags, value]
+    })
+  }
+  popValue() {
+    const tags = this.state.tags;
+    this.setState({
+      tags: tags.slice(0, tags.length - 1)
+    }) 
   }
 
   render() {
