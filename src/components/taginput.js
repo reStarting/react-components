@@ -10,16 +10,18 @@ function uid() {
 
 export default class TagInput extends React.Component {
   static propTypes = {
-    autofocus: PropTypes.bool
+    autofocus: PropTypes.bool,
+    value: PropTypes.array
   };
   static defaultProps = {
-    autofocus: false
+    autofocus: false,
+    value: []
   };
 
   constructor(props) {
     super(props);
     this.state = {
-      tags: ['react', 'redux', 'js']
+      tags: this.props.value
     }
   }
 
@@ -38,6 +40,14 @@ export default class TagInput extends React.Component {
         tags: [...tags, value]
       })
     }
+  }
+  onMouseDown(e) {
+    if(e.target != this.refs.input.getInput())
+    {
+      e.preventDefault();
+      e.stopPropagation();
+    }
+    this.focus();
   }
 
   getInput() {
@@ -59,11 +69,11 @@ export default class TagInput extends React.Component {
 
   render() {
     return (
-      <span {...this.props} className="taginput">
+      <span {...this.props} className="taginput" onMouseDown={::this.onMouseDown}>
         {
           this.renderTags()
         }
-      	<AutoSizeInput onKeyDown={this.onKeyDown.bind(this)} ref="input" value="taginput" />
+      	<AutoSizeInput onKeyDown={::this.onKeyDown} ref="input" value="taginput" />
       </span>
     );
   }
