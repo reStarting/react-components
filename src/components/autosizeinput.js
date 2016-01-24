@@ -47,6 +47,7 @@ export default class AutoSizeInput extends React.Component {
   	this.setState({
   		value
   	})
+    if(this.props.onChange) this.props.onChange(e);
   }
   copyStyle() {
   	const {input, sizer} = this.refs;
@@ -69,11 +70,17 @@ export default class AutoSizeInput extends React.Component {
   select() {
   	this.getInput().select()
   }
+  clear() {
+    this.setState({
+      value: ''
+    })
+  }
   render() {
-  	const inputStyle = {width: this.state.width}
+    const {style, ...other} = this.props;
+    const inputStyle = Object.assign({width: this.state.width}, style);
     return (
-      <span>
-      	<input {...this.props} ref="input" 
+      <span className="autosizeinput" ref="wrap">
+      	<input {...other} ref="input" 
       		value={this.state.value}
       		onChange={this.onValueChange.bind(this)} 
       		style={inputStyle} />
