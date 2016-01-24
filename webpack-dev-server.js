@@ -1,20 +1,27 @@
 var webpack = require('webpack');
 var webpackDevServer = require('webpack-dev-server');
 var webpackConfig = require('./webpack.config');
+var fs = require('fs')
+var path = require('path')
 
+var files = fs.readdirSync('./src/entries')
+files.map(file => {
+    var entry = path.basename(file, '.js');
+    var entryFile = ['webpack-dev-server/client?http://localhost:3000', 'webpack/hot/dev-server', 'babel-polyfill', './src/entries/'+ file];
+    webpackConfig.entry[entry] = entryFile
+})
+console.log(webpackConfig)
 var options = {
-    hot: false,
-    noInfo: false,
-    publicPath: webpackConfig.output.publicPath,
-    headers: {
-        "Access-Control-Allow-Origin": "*"
-    },
-    stats: {
-        colors: true
-    }
+  hot: false,
+  noInfo: false,
+  publicPath: webpackConfig.output.publicPath,
+  headers: {
+    "Access-Control-Allow-Origin": "*"
+  },
+  stats: {
+      colors: true
+  }
 };
-
-
 Object.assign(options, {
     hot: true,
     noInfo: false,

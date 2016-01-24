@@ -3,7 +3,6 @@ var path = require('path');
 
 var config = {
     entry: {
-    	'react-components': ['webpack-dev-server/client?http://localhost:3000', 'webpack/hot/dev-server', './src/index.js']
     },
     output: {
     		publicPath: 'http://localhost:3000/dist/',
@@ -22,6 +21,9 @@ var config = {
             test: /\.jsx?$/,
             loaders: ['babel'],
             exclude: /node_modules/
+        },{
+            test: /\.less$/,
+            loaders: ['style','css','less']
         }]
     },
     resolve: {
