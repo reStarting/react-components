@@ -72,13 +72,13 @@ export default class AutoSizeInput extends React.Component {
   render() {
   	const inputStyle = {width: this.state.width}
     return (
-      <div>
+      <span>
       	<input {...this.props} ref="input" 
       		value={this.state.value}
       		onChange={this.onValueChange.bind(this)} 
       		style={inputStyle} />
       	<div ref="sizer" style={sizerStyle}>{this.state.value}</div>
-      </div>
+      </span>
     );
   }
 }

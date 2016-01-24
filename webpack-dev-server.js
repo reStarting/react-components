@@ -3,14 +3,18 @@ var webpackDevServer = require('webpack-dev-server');
 var webpackConfig = require('./webpack.config');
 var fs = require('fs')
 var path = require('path')
+var child_process = require('child_process')
 
 var files = fs.readdirSync('./src/entries')
 files.map(file => {
-    var entry = path.basename(file, '.js');
+  var entry = path.basename(file, '.js');
+  if(entry != '.DS_Store')
+  {
     var entryFile = ['webpack-dev-server/client?http://localhost:3000', 'webpack/hot/dev-server', 'babel-polyfill', './src/entries/'+ file];
     webpackConfig.entry[entry] = entryFile
+  }
 })
-console.log(webpackConfig)
+
 var options = {
   hot: false,
   noInfo: false,
@@ -31,9 +35,8 @@ Object.assign(options, {
     }
 });
 
-var child_process = require('child_process')
 var compiler = webpack(webpackConfig);
 new webpackDevServer(compiler, options).listen(3000, 'localhost', function() {
     console.info("==> 🌍  Open up localhost:3000 in your browser.");
-    child_process.exec('open localhost:3000/html')
+    child_process.exec('open localhost:3000/html/')
 });
