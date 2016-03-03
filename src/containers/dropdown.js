@@ -1,12 +1,10 @@
 import React from 'react';
+import ReactDom from 'react-dom';
 import DropDown from '../components/dropdown.js'
 
-export default class dropdown extends React.Component {
-  render() {
-    return (
-      <div>
-      	<DropDown items={['apple', 'ajax', 'auto', 'array', 'agent']} />
-      </div>
-    );
-  }
-}
+ReactDom.render(
+  <div>
+  	<DropDown items={['apple', 'ajax', 'auto', 'array', 'agent']} />
+  </div>,
+  document.getElementById("root")
+)

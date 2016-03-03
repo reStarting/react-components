@@ -1,15 +1,10 @@
 import React from 'react'
+import ReactDom from 'react-dom'
 import TagInput from '../components/taginput.js'
 
-export default class App extends React.Component {
-  constructor(props) {
-    super(props);
-  }
-  render() {
-    return (
-      <div>
-        <TagInput autofocus={true} width={500} value={['react', 'redux']} />
-      </div>
-    );
-  }
-}
+ReactDom.render(
+  <div>
+    <TagInput autofocus={true} width={500} value={['react', 'redux']} />
+  </div>,
+  document.getElementById("root")
+)

@@ -5,13 +5,13 @@ var fs = require('fs')
 var path = require('path')
 var child_process = require('child_process')
 
-var files = fs.readdirSync('./src/entries')
+var files = fs.readdirSync('./src/containers')
 files.map(file => {
   var entry = path.basename(file, '.js');
   if(entry != '.DS_Store')
   {
     // , 'babel-polyfill'
-    var entryFile = ['webpack-dev-server/client?http://localhost:3000', 'webpack/hot/dev-server', './src/entries/'+ file];
+    var entryFile = ['webpack-dev-server/client?http://localhost:3000', 'webpack/hot/dev-server', './src/containers/'+ file];
     webpackConfig.entry[entry] = entryFile
   }
 })
