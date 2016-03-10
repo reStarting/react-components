@@ -39,5 +39,5 @@ Object.assign(options, {
 var compiler = webpack(webpackConfig);
 new webpackDevServer(compiler, options).listen(3000, 'localhost', function() {
     console.info("==> 🌍  Open up localhost:3000 in your browser.");
-    child_process.exec('open localhost:3000/html/')
+    child_process.exec('open http://localhost:3000/examples/')
 });
