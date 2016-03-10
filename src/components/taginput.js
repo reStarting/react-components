@@ -117,9 +117,10 @@ export default class TagInput extends React.Component {
     );
   }
   renderTags() {
+    const ts = Object.assign({}, tagStyle, this.props.tagStyle);
     return this.state.tags.map(tag => {
       return (
-        <span style={tagStyle} key={uid()}>{tag}</span>
+        <span style={ts} key={uid()}>{tag}</span>
       )
     })
   }
