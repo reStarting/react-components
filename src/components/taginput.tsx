@@ -1,4 +1,4 @@
-import React, {PropTypes} from 'react';
+import * as React from 'react';
 import AutoSizeInput from './autosizeinput';
 
 let index = 0;
@@ -29,11 +29,15 @@ const inputStyle = {
   fontSize:16
 }
 
-export default class TagInput extends React.Component {
-  static propTypes = {
-    autofocus: PropTypes.bool,
-    value: PropTypes.array
-  };
+interface TagInputProps {
+    autofocus: boolean,
+    value: string[],
+    style: Object,
+    width: number,
+    [props: string]: any
+}
+
+export default class TagInput extends React.Component<TagInputProps, any> {
   static defaultProps = {
     autofocus: false,
     value: []
