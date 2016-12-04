@@ -7,25 +7,24 @@ var child_process = require('child_process')
 
 var files = fs.readdirSync('./src/containers')
 files.map(file => {
-  var entry = path.basename(file, '.js');
-  if(entry != '.DS_Store')
-  {
-    // , 'babel-polyfill'
-    var entryFile = ['webpack-dev-server/client?http://localhost:3000', 'webpack/hot/dev-server', './src/containers/'+ file];
-    webpackConfig.entry[entry] = entryFile
-  }
+	var entry = path.basename(file, '.tsx');
+	if(entry != '.DS_Store') {
+		// , 'babel-polyfill'
+		var entryFile = ['webpack-dev-server/client?http://localhost:3000', 'webpack/hot/dev-server', './src/containers/'+ file];
+		webpackConfig.entry[entry] = entryFile
+	}
 })
 
 var options = {
-  hot: false,
-  noInfo: false,
-  publicPath: webpackConfig.output.publicPath,
-  headers: {
-    "Access-Control-Allow-Origin": "*"
-  },
-  stats: {
-      colors: true
-  }
+	hot: false,
+	noInfo: false,
+	publicPath: webpackConfig.output.publicPath,
+	headers: {
+		"Access-Control-Allow-Origin": "*"
+	},
+	stats: {
+		colors: true
+	}
 };
 Object.assign(options, {
     hot: true,

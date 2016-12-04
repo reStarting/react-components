@@ -12,7 +12,6 @@ const sizerStyle = { position: 'absolute', visibility: 'hidden', height: 0, widt
 const nextFrame = typeof window !== 'undefined' ? (function(){
 	return window.requestAnimationFrame
 		|| window.webkitRequestAnimationFrame
-		|| window.mozRequestAnimationFrame
 		|| function (callback) {
 			window.setTimeout(callback, 1000 / 60);
 		};
@@ -20,15 +19,17 @@ const nextFrame = typeof window !== 'undefined' ? (function(){
 
 
 interface AutoSizeInputProps {
-    value: string,
-    autofocus: boolean,
-    onChange: (e: Event) => {},
-    style: Object,
-    width: number,
+    value?: string,
+    autofocus?: boolean,
+    onChange?: (e: Event) => {},
+    style?: Object,
+    width?: number,
     [prop: string]: any
 }
 
 export default class AutoSizeInput extends React.Component<AutoSizeInputProps, any> {
+    sizer = null
+    input = null
 	static defaultProps = {
 		autofocus: false
 	};
@@ -47,7 +48,7 @@ export default class AutoSizeInput extends React.Component<AutoSizeInputProps, a
         nextFrame(this.updateInputWidth.bind(this))	
     }
     updateInputWidth() {
-        const width = this.refs.sizer.scrollWidth + 1;
+        const width = this.sizer.scrollWidth + 1;
         if(this.state.width != width)
         {
             this.copyStyle();
@@ -64,16 +65,15 @@ export default class AutoSizeInput extends React.Component<AutoSizeInputProps, a
         if(this.props.onChange) this.props.onChange(e);
     }
     copyStyle() {
-        const {input, sizer} = this.refs;
-        const inputStyle = window.getComputedStyle(input) || input.currentStyle;
-        sizer.style.fontSize = inputStyle.fontSize;
-            sizer.style.fontFamily = inputStyle.fontFamily;
-            sizer.style.fontWeight = inputStyle.fontWeight;
-            sizer.style.fontStyle = inputStyle.fontStyle;
-            sizer.style.letterSpacing = inputStyle.letterSpacing;
+        const inputStyle = window.getComputedStyle(this.input) || this.input.currentStyle;
+        this.sizer.style.fontSize = inputStyle.fontSize;
+        this.sizer.style.fontFamily = inputStyle.fontFamily;
+        this.sizer.style.fontWeight = inputStyle.fontWeight;
+        this.sizer.style.fontStyle = inputStyle.fontStyle;
+        this.sizer.style.letterSpacing = inputStyle.letterSpacing;
     }
     getInput() {
-        return this.refs.input;
+        return this.input;
     }
     focus() {
         this.getInput().focus();
@@ -90,15 +90,15 @@ export default class AutoSizeInput extends React.Component<AutoSizeInputProps, a
         })
     }
     render() {
-        const {style, ...other} = this.props;
+        const {style} = this.props;
         const inputStyle = Object.assign({width: this.props.width || this.state.width}, iptstyle, style);
         return (
             <span style={{verticalAlign: 'middle'}} ref="wrap">
-                <input {...other} ref="input" 
+                <input ref={(ipt) => {this.input = ipt}} 
                     value={this.state.value}
                     onChange={this.onValueChange.bind(this)} 
                     style={inputStyle} />
-                <div ref="sizer" style={sizerStyle}>{this.state.value}</div>
+                <div ref={(div) => {this.sizer = div}} style={sizerStyle}>{this.state.value}</div>
             </span>
         );
     }

@@ -4,7 +4,7 @@ import DropDown from '../components/dropdown'
 
 ReactDOM.render(
   <div>
-  	<DropDown items={['apple', 'ajax', 'auto', 'array', 'agent']} />
+  	<DropDown name="drop" items={['apple', 'ajax', 'auto', 'array', 'agent']} />
   </div>,
   document.getElementById("root")
 )
