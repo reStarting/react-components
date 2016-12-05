@@ -1,9 +1,9 @@
-import React from 'react'
-import ReactDom from 'react-dom'
-import AutoSizeInput from '../components/autosizeinput.js'
+import * as React from 'react'
+import * as ReactDOM from 'react-dom'
+import AutoSizeInput from '../components/autosizeinput'
 
 
-ReactDom.render(
+ReactDOM.render(
   <div>
     <AutoSizeInput autofocus={true} value="AutoSizeInput" />
     <br />

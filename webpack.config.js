@@ -5,7 +5,7 @@ var config = {
     entry: {
     },
     output: {
-    		publicPath: 'http://localhost:3000/dist/',
+    	publicPath: 'http://localhost:3000/dist/',
         path: path.join(__dirname, 'dist'),
         filename: '[name].js'
     },
@@ -23,11 +23,16 @@ var config = {
             exclude: /node_modules/
         },{
             test: /\.less$/,
-            loaders: ['style','css','less']
+            loaders: ['style','css','less'],
+            exclude: /node_modules/
+        },{ 
+            test: /\.tsx?$/, 
+            loader: 'ts-loader',
+            exclude: /node_modules/
         }]
     },
     resolve: {
-        extensions: ['', '.js', '.jsx']
+        extensions: ['', '.js', '.jsx', '.ts', '.tsx']
     },
     devtool: 'cheap-module-eval-source-map'
 };
