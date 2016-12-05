@@ -10,6 +10,11 @@ var config = {
         filename: '[name].js'
     },
     plugins: [
+        new webpack.DefinePlugin({
+            "process.env": {
+                NODE_ENV: JSON.stringify("production")
+            }
+        }),
         new webpack.optimize.CommonsChunkPlugin('common','common.js'),
         new webpack.optimize.UglifyJsPlugin(),
         new webpack.optimize.OccurenceOrderPlugin(), 
@@ -27,7 +32,7 @@ var config = {
             exclude: /node_modules/
         },{ 
             test: /\.tsx?$/, 
-            loader: 'ts-loader',
+            loader: 'babel!ts-loader',
             exclude: /node_modules/
         }]
     },

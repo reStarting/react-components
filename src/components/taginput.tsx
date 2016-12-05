@@ -59,23 +59,23 @@ export default class TagInput extends React.Component<TagInputProps, any> {
         const value = e.target.value
         if( e.keyCode == 13 ) //enter
         {
-        if(value.trim() == '') return;
-        this.clear();
-        this.pushValue(value)
+            if(value.trim() == '') return;
+            this.clear();
+            this.pushValue(value)
         }
         else if( e.keyCode == 8 ) //delete
         {
-        if(value == '')
-        {
-            this.popValue();
-        }
+            if(value == '')
+            {
+                this.popValue();
+            }
         }
     }
     onMouseDown(e) {
         if(e.target != this.input.getInput())
         {
-        e.preventDefault();
-        e.stopPropagation();
+            e.preventDefault();
+            e.stopPropagation();
         }
         this.focus();
     }
@@ -115,20 +115,20 @@ export default class TagInput extends React.Component<TagInputProps, any> {
         return (
         <span style={ws} onMouseDown={this.onMouseDown.bind(this)}>
             {
-            this.renderTags()
+                this.renderTags()
             }
             <AutoSizeInput 
                 style={inputStyle} 
-                onKeyDown={this.onKeyDown} 
+                onKeyDown={this.onKeyDown.bind(this)} 
                 ref={(input) => {this.input = input}} value="taginput" />
         </span>
         );
     }
     renderTags() {
         return this.state.tags.map(tag => {
-        return (
-            <span style={tagStyle} key={uid()}>{tag}</span>
-        )
+            return (
+                <span style={tagStyle} key={uid()}>{tag}</span>
+            )
         })
     }
 }

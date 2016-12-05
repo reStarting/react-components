@@ -21,12 +21,12 @@ const nextFrame = typeof window !== 'undefined' ? (function(){
 interface AutoSizeInputProps {
     value?: string,
     autofocus?: boolean,
-    onChange?: (e: Event) => {},
+    onChange?: React.FormEventHandler<any>,
+    onKeyDown?:React.EventHandler<React.KeyboardEvent<HTMLInputElement>>,
     style?: Object,
     width?: number,
     [prop: string]: any
 }
-
 export default class AutoSizeInput extends React.Component<AutoSizeInputProps, any> {
     sizer = null
     input = null
@@ -97,6 +97,7 @@ export default class AutoSizeInput extends React.Component<AutoSizeInputProps, a
                 <input ref={(ipt) => {this.input = ipt}} 
                     value={this.state.value}
                     onChange={this.onValueChange.bind(this)} 
+                    onKeyDown={this.props.onKeyDown}
                     style={inputStyle} />
                 <div ref={(div) => {this.sizer = div}} style={sizerStyle}>{this.state.value}</div>
             </span>
