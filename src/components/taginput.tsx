@@ -51,6 +51,7 @@ export default class TagInput extends React.Component<TagInputProps, any> {
         }
     }
 
+
     componentDidMount() {
         this.props.autofocus && this.focus();
     }

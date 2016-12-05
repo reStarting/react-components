@@ -24,7 +24,7 @@ var config = {
     module: {
         loaders: [{
             test: /\.jsx?$/,
-            loaders: ['babel'],
+            loaders: 'babel',
             exclude: /node_modules/
         },{
             test: /\.less$/,
@@ -34,6 +34,9 @@ var config = {
             test: /\.tsx?$/, 
             loader: 'babel!ts-loader',
             exclude: /node_modules/
+        }],
+        preLoaders: [{
+            test: /\.js$/, loader: "source-map-loader" 
         }]
     },
     resolve: {
